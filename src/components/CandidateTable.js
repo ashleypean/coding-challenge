@@ -7,9 +7,16 @@ import { ReactComponent as DownCaret } from '../ui-kit/icons/svg/down_caret.svg'
 const Table = styled.table`
   border-collapse: collapse;
   border-spacing: 20px;
+  width: 100%;
 
   th, td {
     padding: 20px;
+    border-top: 1px solid gray;
+    vertical-align: center;
+  }
+
+  tr {
+    text-align: center;
   }
 `;
 
@@ -17,14 +24,14 @@ const TableHeader = styled.thead`
   font-weight: bold;
   font-size: 1.2em;
   padding: 10px;
-  margin: 0;
-  padding: 0;
   display: table-header-group;
 `;
 
-const TableBody = styled.tbody`
-  width: 100%;
-  border: 1px solid purple;
+const DownCaretIcon = styled(DownCaret)`
+  height: 15px;
+  width: 15px;
+  margin-left: 10px;
+  vertical-align: middle;
 `;
 
 
@@ -36,20 +43,29 @@ const CandidateTable = () => {
           <tr>
             <th>
               <input type="checkbox" disabled/>
-              <DownCaret style={{height: 15, width: 15}}/>
+              <DownCaretIcon />
             </th>
-            <th>Candidate Name</th>
+            <th>
+              Candidate Name
+              <DownCaretIcon />
+            </th>
             <th>Status</th>
-            <th># Apps</th>
-            <th>Last Action</th>
+            <th>
+              # Apps
+              <DownCaretIcon />
+            </th>
+            <th>
+              Last Action
+              <DownCaretIcon />
+            </th>
             <th>Add</th>
           </tr>
         </TableHeader>
-        <TableBody>
-          {CandidateData.results.map((candidate, index) => 
-            <CandidateRow key={index} candidate={candidate} />
+        <tbody>
+          {CandidateData.results.map((candidate) => 
+            <CandidateRow key={candidate.id} candidate={candidate} />
           )}
-        </TableBody>
+        </tbody>
         
       </Table>
     </div>
