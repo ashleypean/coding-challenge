@@ -25,8 +25,17 @@ function App() {
           children={<ModalContent applicationData={modalData}/>}
           />
       )}
-      <SearchBar search={search} setSearch={setSearch}/>
-      <CandidateTable setModalOpen={setModalOpen} setModalData={setModalData}/>
+      <SearchBar 
+        search={search} 
+        setSearch={setSearch} 
+        candidates={candidateData.results}
+        setSearchResults={setSearchResults}
+        />
+      <CandidateTable 
+        setModalOpen={setModalOpen} 
+        setModalData={setModalData}
+        searchResults={searchResults}
+        />
     </MainContainer>
   );
 }

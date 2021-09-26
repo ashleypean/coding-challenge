@@ -13,7 +13,7 @@ const DownCaretIcon = styled(DownCaret)`
 `;
 
 
-const CandidateTable = ({ setModalOpen, setModalData }) => {
+const CandidateTable = ({ setModalOpen, setModalData, searchResults }) => {
   return (
     <div>
       <Table className="table table-striped table-bordered table-hover">
@@ -40,7 +40,7 @@ const CandidateTable = ({ setModalOpen, setModalData }) => {
           </tr>
         </thead>
         <tbody>
-          {CandidateData.results.map((candidate) => 
+          {searchResults.map((candidate) => 
             <CandidateRow 
               key={candidate.id} 
               candidate={candidate} 

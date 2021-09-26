@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import CandidateMeta from './CandidateMeta';
 import { ReactComponent as SearchWhite } from '../ui-kit/icons/svg/search_white.svg';
+import { useOnKeyEvent } from '../hooks/useOnKeyEvent';
 
 const SearchContainer = styled.div`
   width: 100%;
@@ -33,7 +34,7 @@ const SearchInput = styled.input`
 `;
 
 const SearchButton = styled.button`
-  width: 5%;
+  width: 10%;
   max-width: 60px;
   background-color: green;
   border: 10px solid gray;
@@ -45,7 +46,15 @@ const SearchButton = styled.button`
   margin-left: -10px;
 `
 
-const SearchBar = ({ search, setSearch }) => {
+const SearchBar = ({ search, setSearch, candidates }) => {
+  const filterSearchResults = () => {
+    console.log(candidates)
+    console.log('filtering')
+  }
+
+
+ useOnKeyEvent('Enter', 'keyup', filterSearchResults, true )
+
 
   const handleSearch = (e) => {
     setSearch(e.target.value);
