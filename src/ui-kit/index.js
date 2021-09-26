@@ -1,4 +1,4 @@
-import * as Modal from './Modal';
+import * as Modal from '../components/Modal';
 
 export {
   Modal,

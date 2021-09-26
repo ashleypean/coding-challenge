@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { ReactComponent as PlusSign} from '../ui-kit/icons/svg/icon-plus-with-circle.svg'
-
+import { ReactComponent as RighCaret } from '../ui-kit/icons/svg/right_caret.svg'
 
 const statusColorRef = {
   4: 'green',  // hired
@@ -19,38 +19,80 @@ const StatusIndicator = styled.span`
   margin: 0 5px;
 `;
 
+const InnerTableRow = styled.tr`
+  background: white;
+  border-left: 4px solid gray;
+`;
 
-const CandidateRow = ({ candidate, onClick }) => {
-  const [isChecked, setIsChecked] = useState(candidate);
+
+const CandidateRow = ({ candidate, setModalOpen, setModalData }) => {
+  const [isChecked, setIsChecked] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
 
   const handleCheckbox = () => {
     setIsChecked(prev => !prev);
   }
 
+  const handleIsExpanded = () => {
+    console.log('click')
+    setIsExpanded(prev => !prev);
+  }
+
+  const toggleModal = (applicationData) => {
+    setModalOpen(true);
+    setModalData(applicationData);
+  }
 
   return (
-    <tr className="candidate-row">
-      <td>
-        <input type="checkbox" checked={isChecked} onClick={handleCheckbox} />
-      </td>
-      <td>
-        {candidate.name}
-      </td>
-      <td>
-        <StatusIndicator 
-          color="4" />
-         Hired
-      </td>
-      <td>
-        {candidate.applications.length}
-      </td>
-      <td>
-        {candidate.updated ? candidate.updated : 'N/A'}
-      </td>
-      <td>
-        <PlusSign />
-      </td>
-    </tr>
+    <>
+      <tr className="candidate-row" onClick={handleIsExpanded}>
+        <td>
+          <input type="checkbox" checked={isChecked} onChange={handleCheckbox} />
+        </td>
+        <td>
+          {candidate.name}
+        </td>
+        <td>
+          <StatusIndicator 
+            color="4" />
+          Hired
+        </td>
+        <td>
+          {candidate.applications.length}
+        </td>
+        <td>
+          {candidate.updated ? candidate.updated : 'N/A'}
+        </td>
+        <td>
+          <PlusSign />
+        </td>
+      </tr>
+      {isExpanded && (
+        candidate.applications.map((application) => {
+          return (
+            <InnerTableRow 
+              key={application.id} 
+              onClick={() => toggleModal(application)}
+              >
+            {/* Empty cell*/}
+              <td></td> 
+            <td>
+              {candidate.name}
+            </td>
+            <td>
+              <StatusIndicator 
+                color="4" />
+              Hired
+            </td>
+            {/* Empty cell*/}
+            <td colSpan="2"></td>
+            <td>
+              <RighCaret />
+            </td>
+          </InnerTableRow>
+        )})
+      )}
+    </>
   )
 }
 
