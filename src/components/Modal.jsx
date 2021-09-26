@@ -30,6 +30,7 @@ const Modal = ({
 
   // Focus first input on modal open: accessibility best practice
   useEffect(() => {
+    console.log('modal status', isOpen)
     if (isOpen && focusOnOpenRef) {
       focusOnOpenRef.current.focus();
     }

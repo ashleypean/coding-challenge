@@ -34,13 +34,12 @@ const CandidateRow = ({ candidate, setModalOpen, setModalData }) => {
   }
 
   const handleIsExpanded = () => {
-    console.log('click')
     setIsExpanded(prev => !prev);
   }
 
   const toggleModal = (applicationData) => {
-    setModalOpen(true);
     setModalData(applicationData);
+    setModalOpen(true);
   }
 
   return (

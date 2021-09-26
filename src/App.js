@@ -3,6 +3,8 @@ import CandidateTable from './components/CandidateTable';
 import SearchBar from './components/SearchBar';
 import styled from 'styled-components';
 import { Modal } from './components/Modal';
+import candidateData from './data/candidates.json'
+import ModalContent from './components/ModalContent'
 
 const MainContainer = styled.div`
   margin: 0 300px;
@@ -10,6 +12,7 @@ const MainContainer = styled.div`
 
 function App() {
   const [search, setSearch] = useState('');
+  const [searchResults, setSearchResults] = useState(candidateData.results);
   const [modalOpen, setModalOpen] = useState(false);
   const [modalData, setModalData] = useState(null);
 
@@ -17,9 +20,9 @@ function App() {
     <MainContainer>
       {modalOpen && (
         <Modal
-          open={modalOpen}
+          isOpen={modalOpen}
           onClose={() => setModalOpen(false)}
-          data={modalData}
+          children={<ModalContent applicationData={modalData}/>}
           />
       )}
       <SearchBar search={search} setSearch={setSearch}/>
